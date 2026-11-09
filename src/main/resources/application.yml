@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: VoiceMovie
+  jpa:
+    open-in-view: false
