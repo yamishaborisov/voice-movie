@@ -18,22 +18,22 @@ import java.util.UUID;
 public class S3StorageService implements FileStorageService{
 
     private final S3Client s3Client;
-    private final String bucket;
+    private final String bucketName;
 
 
     public S3StorageService(S3Client s3Client,
-                            @Value("${S3_BUCKET}") String bucket) {
+                            @Value("${storage.s3.bucket}") String bucketName) {
         this.s3Client = s3Client;
-        this.bucket = bucket;
+        this.bucketName = bucketName;
     }
 
     @Override
     public String saveFile(MultipartFile file){
 
-        String fileKey = UUID.randomUUID().toString() + ".mp3";
+        String fileKey = UUID.randomUUID() + ".mp3";
 
         PutObjectRequest request = PutObjectRequest.builder()
-                .bucket(bucket)
+                .bucket(bucketName)
                 .key(fileKey)
                 .contentType("audio/mpeg")
                 .build();
@@ -53,7 +53,7 @@ public class S3StorageService implements FileStorageService{
     @Override
     public InputStream getFile(String fileKey) {
         GetObjectRequest request = GetObjectRequest.builder()
-                .bucket(bucket)
+                .bucket(bucketName)
                 .key(fileKey)
                 .build();
 
