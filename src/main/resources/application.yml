@@ -21,4 +21,6 @@ spring:
       chat:
         model: claude-haiku-5-5
         max-tokens: 512
-        
+storage:
+  s3:
+    bucket: ${S3_BUCKET}
