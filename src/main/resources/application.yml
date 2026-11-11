@@ -1,5 +1,24 @@
 spring:
+  config:
+    import: optional:file:.env[.properties]
+
   application:
     name: VoiceMovie
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/DB
+    username: ${DB_USER}
+    password: ${DB_PASS}
+
   jpa:
     open-in-view: false
+    hibernate:
+      ddl-auto: validate
+
+  ai:
+    anthropic:
+      api-key: ${ANTHROPIC_API_KEY}
+      chat:
+        model: claude-haiku-5-5
+        max-tokens: 512
+        
