@@ -1,0 +1,61 @@
+databaseChangeLog:
+  - changeSet:
+      id: 001-create-movie-request-task
+      author: boris
+      dbms: postgresql
+      changes:
+        - sql:
+            sql: >-
+              CREATE TYPE movie_request_task_status AS ENUM
+              ('PENDING', 'TRANSCRIBING', 'EXTRACTING_CRITERIA',
+               'SEARCHING_MOVIES', 'COMPLETED', 'FAILED')
+        - sql:
+            sql: CREATE TYPE input_type AS ENUM ('TEXT', 'VOICE')
+        - createTable:
+            tableName: movie_request_task
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  generationType: BY DEFAULT
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_movie_request_task
+                    nullable: false
+              - column:
+                  name: status
+                  type: movie_request_task_status
+                  constraints:
+                    nullable: false
+              - column:
+                  name: input_type
+                  type: input_type
+                  constraints:
+                    nullable: false
+              - column:
+                  name: file_reference
+                  type: VARCHAR(255)
+              - column:
+                  name: input_text
+                  type: TEXT
+              - column:
+                  name: created_at
+                  type: TIMESTAMP(6) WITH TIME ZONE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP(6) WITH TIME ZONE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: transcription_result
+                  type: JSONB
+      rollback:
+        - dropTable:
+            tableName: movie_request_task
+        - sql:
+            sql: DROP TYPE input_type
+        - sql:
+            sql: DROP TYPE movie_request_task_status

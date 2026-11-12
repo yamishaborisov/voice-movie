@@ -1,0 +1,45 @@
+databaseChangeLog:
+  - changeSet:
+      id: 002-create-movies
+      author: boris
+      dbms: postgresql
+      changes:
+        - createTable:
+            tableName: movies
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  generationType: BY DEFAULT
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_movies
+                    nullable: false
+              - column:
+                  name: tmdb_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    unique: true
+                    uniqueConstraintName: uk_movies_tmdb_id
+              - column:
+                  name: movie_title
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: TEXT
+              - column:
+                  name: movie_rating
+                  type: DOUBLE PRECISION
+              - column:
+                  name: release_date
+                  type: DATE
+              - column:
+                  name: poster_path
+                  type: VARCHAR(255)
+      rollback:
+        - dropTable:
+            tableName: movies
