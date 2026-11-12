@@ -1,0 +1,55 @@
+databaseChangeLog:
+  - changeSet:
+      id: 003-create-movie-search-result
+      author: boris
+      dbms: postgresql
+      changes:
+        - createTable:
+            tableName: movie_search_result
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  generationType: BY DEFAULT
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_movie_search_result
+                    nullable: false
+              - column:
+                  name: movie_request_task_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: movie_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            constraintName: fk_movie_search_result_task
+            baseTableName: movie_search_result
+            baseColumnNames: movie_request_task_id
+            referencedTableName: movie_request_task
+            referencedColumnNames: id
+        - addForeignKeyConstraint:
+            constraintName: fk_movie_search_result_movie
+            baseTableName: movie_search_result
+            baseColumnNames: movie_id
+            referencedTableName: movies
+            referencedColumnNames: id
+        - createIndex:
+            indexName: idx_movie_search_result_task_id
+            tableName: movie_search_result
+            columns:
+              - column:
+                  name: movie_request_task_id
+        - createIndex:
+            indexName: idx_movie_search_result_movie_id
+            tableName: movie_search_result
+            columns:
+              - column:
+                  name: movie_id
+      rollback:
+        - dropTable:
+            tableName: movie_search_result
