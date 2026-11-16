@@ -1,5 +1,7 @@
 package boris.company.voicemovie.service;
 
+import boris.company.voicemovie.dto.MovieSearchCriteria;
+
 public interface AIService {
-    String generateResponse(String prompt);
+    MovieSearchCriteria extractCriteria(String text);
 }
