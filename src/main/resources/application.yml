@@ -24,3 +24,7 @@ spring:
 storage:
   s3:
     bucket: ${S3_BUCKET}
+
+poisk-kino:
+  base-url: https://api.poiskkino.dev/v1.5
+  token: ${PK_ACCESS_TOKEN}
