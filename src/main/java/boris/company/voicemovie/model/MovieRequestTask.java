@@ -1,5 +1,6 @@
 package boris.company.voicemovie.model;
 
+import boris.company.voicemovie.model.dto.MovieSearchCriteria;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -46,6 +47,10 @@ public class MovieRequestTask {
     @JdbcTypeCode(SqlTypes.JSON)
     private TranscriptionResult transcriptionResult;
 
+    @Setter
+    @JdbcTypeCode(SqlTypes.JSON)
+    private MovieSearchCriteria searchCriteria;
+
     public void startExtractingCriteria() {
         this.status = MovieRequestTaskStatus.EXTRACTING_CRITERIA;
     }
@@ -61,5 +66,14 @@ public class MovieRequestTask {
     public void markFailed(String errorMessage) {
         this.status = MovieRequestTaskStatus.FAILED;
         this.errorMessage = errorMessage;
+    }
+
+    public void startTranscribing() {
+        this.status = MovieRequestTaskStatus.TRANSCRIBING;
+    }
+
+    public void saveTranscriptionResult(TranscriptionResult transcriptionResult) {
+        this.transcriptionResult = transcriptionResult;
+        this.inputText = transcriptionResult.text();
     }
 }

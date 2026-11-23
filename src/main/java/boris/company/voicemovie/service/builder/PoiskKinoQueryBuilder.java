@@ -15,7 +15,7 @@ public class PoiskKinoQueryBuilder {
             "id", "name", "description", "premiere", "rating", "poster", "countries"
     );
     private static final List<String> NOT_NULL_FIELDS = List.of(
-            "premiere.world", "rating.kp", "poster.url", "countries.name"
+            "name", "premiere.world", "rating.kp", "poster.url", "countries.name"
     );
 
     public URI buildSearchUri(UriBuilder builder, MovieSearchCriteria criteria) {

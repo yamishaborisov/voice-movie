@@ -30,6 +30,10 @@ poisk-kino:
   base-url: https://api.poiskkino.dev/v1.5
   token: ${PK_ACCESS_TOKEN}
 
+assembly:
+  url: https://dictation.assemblyai.com/v1
+  api-key: ${ASSEMBLY_API_KEY}
+
 scheduler:
   movie-request:
     fixed-delay: 5000
