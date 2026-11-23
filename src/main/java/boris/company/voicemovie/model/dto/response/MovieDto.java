@@ -1,4 +1,4 @@
-package boris.company.voicemovie.dto.response;
+package boris.company.voicemovie.model.dto.response;
 
 import java.time.LocalDate;
 import java.util.List;

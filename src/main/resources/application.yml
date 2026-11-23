@@ -21,6 +21,7 @@ spring:
       chat:
         model: claude-haiku-5-5
         max-tokens: 512
+
 storage:
   s3:
     bucket: ${S3_BUCKET}
@@ -28,3 +29,7 @@ storage:
 poisk-kino:
   base-url: https://api.poiskkino.dev/v1.5
   token: ${PK_ACCESS_TOKEN}
+
+scheduler:
+  movie-request:
+    fixed-delay: 5000

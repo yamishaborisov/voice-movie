@@ -1,10 +1,9 @@
 package boris.company.voicemovie.service;
 
-import boris.company.voicemovie.dto.response.MovieDto;
-import boris.company.voicemovie.dto.MovieSearchCriteria;
-import reactor.core.publisher.Mono;
+import boris.company.voicemovie.model.dto.response.MovieDto;
+import boris.company.voicemovie.model.dto.MovieSearchCriteria;
 
 import java.util.List;
 
 public interface MovieSearchService {
-    Mono<List<MovieDto>> search(MovieSearchCriteria criteria);}
+    List<MovieDto> search(MovieSearchCriteria criteria);}
