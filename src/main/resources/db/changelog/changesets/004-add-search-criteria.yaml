@@ -1,0 +1,15 @@
+databaseChangeLog:
+  - changeSet:
+      id: 004-add-search-criteria
+      author: boris
+      changes:
+        - addColumn:
+            tableName: movie_request_task
+            columns:
+              - column:
+                  name: search_criteria
+                  type: JSONB
+      rollback:
+        - dropColumn:
+            tableName: movie_request_task
+            columnName: search_criteria
