@@ -17,12 +17,12 @@ databaseChangeLog:
                     primaryKeyName: pk_movies
                     nullable: false
               - column:
-                  name: tmdb_id
+                  name: poisk_kino_id
                   type: BIGINT
                   constraints:
                     nullable: false
                     unique: true
-                    uniqueConstraintName: uk_movies_tmdb_id
+                    uniqueConstraintName: uk_movies_poisk_kino_id
               - column:
                   name: movie_title
                   type: VARCHAR(255)
@@ -37,6 +37,9 @@ databaseChangeLog:
               - column:
                   name: release_date
                   type: DATE
+              - column:
+                  name: countries
+                  type: JSONB
               - column:
                   name: poster_path
                   type: VARCHAR(255)

@@ -1,4 +1,4 @@
-package boris.company.voicemovie.dto.response;
+package boris.company.voicemovie.model.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
