@@ -37,3 +37,7 @@ assembly:
 scheduler:
   movie-request:
     fixed-delay: 5000
+    batch-size: 10
+    processing-timeout-seconds: 600
+    retry:
+      delays-seconds: 10,30

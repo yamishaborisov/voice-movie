@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - changeSet:
+      id: 005-update-task-processing
+      author: boris
+      dbms: postgresql
+      changes:
+        - sql:
+            sql: |
+              ALTER TABLE movie_request_task
+                ADD COLUMN IF NOT EXISTS processing_started_at TIMESTAMP(6) WITH TIME ZONE,
+                ADD COLUMN IF NOT EXISTS retry_count INTEGER NOT NULL DEFAULT 0,
+                ADD COLUMN IF NOT EXISTS next_retry_at TIMESTAMP(6) WITH TIME ZONE;
+              ALTER TABLE movie_request_task DROP COLUMN IF EXISTS processing;
