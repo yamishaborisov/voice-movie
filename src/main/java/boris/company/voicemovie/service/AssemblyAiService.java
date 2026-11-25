@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,7 +22,13 @@ public class AssemblyAiService implements TranscriptionService{
     @Override
     public TranscriptionResult transcribe(String fileReference) {
         Resource audio = readAudio(fileReference);
-        return assemblyAiClient.transcribeAudio(audio);
+        TranscriptionResult result = assemblyAiClient.transcribeAudio(audio);
+
+        if (result == null || !StringUtils.hasText(result.text())) {
+            throw new IllegalStateException("Не удалось распознать речь");
+        }
+
+        return result;
     }
 
     private Resource readAudio(String fileReference) {
